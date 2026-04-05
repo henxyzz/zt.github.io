@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TKA Matematika SMP 2026 — Belajar Santai</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --surface: #0f1623;
+    --card: #141d2e;
+    --border: #1e2d45;
+    --text: #e8edf5;
+    --muted: #6b7fa0;
+    --bilangan: #38bdf8;
+    --aljabar: #34d399;
+    --geometri: #fb923c;
+    --statistika: #c084fc;
+    --danger: #f87171;
+    --success: #4ade80;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute; top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(56,189,248,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    color: var(--bilangan);
+    padding: 6px 16px; border-radius: 99px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 24px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 8vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, #38bdf8 0%, #c084fc 50%, #34d399 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--muted); font-size: 16px; max-width: 480px;
+    margin: 0 auto 40px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .topic-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .pill {
+    padding: 8px 20px; border-radius: 99px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .pill:hover { transform: translateY(-2px); }
+  .pill-b { background: rgba(56,189,248,0.15); color: var(--bilangan); border: 1px solid rgba(56,189,248,0.4); }
+  .pill-a { background: rgba(52,211,153,0.15); color: var(--aljabar); border: 1px solid rgba(52,211,153,0.4); }
+  .pill-g { background: rgba(251,146,60,0.15); color: var(--geometri); border: 1px solid rgba(251,146,60,0.4); }
+  .pill-s { background: rgba(192,132,252,0.15); color: var(--statistika); border: 1px solid rgba(192,132,252,0.4); }
+
+  .scroll-hint {
+    color: var(--muted); font-size: 12px; letter-spacing: 1px;
+    animation: fadeUp 0.7s ease 0.5s both, bob 2s ease 1s infinite;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    max-width: 860px; margin: 0 auto;
+    padding: 60px 20px;
+  }
+
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .section-line {
+    height: 2px; border-radius: 99px; margin-bottom: 40px;
+    opacity: 0.4;
+  }
+
+  /* ── FORMULA CARDS ── */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .formula-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .formula-card:hover { transform: translateY(-3px); }
+
+  .formula-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .formula-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 8px;
+    opacity: 0.7;
+  }
+
+  .formula-name {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .formula-box {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    white-space: pre-wrap;
+  }
+
+  /* ── CONTOH SOAL ── */
+  .example-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+
+  .example-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+    text-transform: uppercase; margin-bottom: 10px;
+    display: inline-block; padding: 3px 10px; border-radius: 6px;
+  }
+
+  .example-q {
+    font-size: 14px; color: var(--text);
+    margin-bottom: 14px; line-height: 1.7;
+  }
+
+  .example-steps {
+    background: rgba(0,0,0,0.25);
+    border-radius: 10px; padding: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; line-height: 2; color: #94a3b8;
+    white-space: pre-wrap; border-left: 3px solid;
+    margin-bottom: 10px;
+  }
+
+  .example-ans {
+    font-size: 13px; font-weight: 600;
+  }
+
+  /* ── LATIHAN SOAL ── */
+  .latihan-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 800;
+    margin-bottom: 16px; margin-top: 40px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .soal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+  }
+
+  .soal-card.correct { border-color: var(--success); }
+  .soal-card.wrong { border-color: var(--danger); }
+  .soal-card.surrendered { border-color: #f59e0b; }
+
+  .soal-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px; flex-wrap: wrap;
+  }
+
+  .soal-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    color: var(--muted);
+  }
+
+  .soal-topic-tag {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; padding: 2px 9px; border-radius: 6px;
+  }
+
+  .soal-status { margin-left: auto; font-size: 18px; }
+
+  .soal-q {
+    font-size: 14px; color: var(--text);
+    margin-bottom: 14px; line-height: 1.7;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+
+  .option-btn {
+    background: rgba(255,255,255,0.03);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: var(--muted);
+    font-size: 13px; text-align: left;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    width: 100%;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: currentColor;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+  }
+  .option-btn.selected {
+    border-color: #38bdf8;
+    background: rgba(56,189,248,0.1);
+    color: #38bdf8;
+  }
+  .option-btn.correct-ans {
+    border-color: var(--success) !important;
+    background: rgba(74,222,128,0.1) !important;
+    color: var(--success) !important;
+  }
+  .option-btn.wrong-ans {
+    border-color: var(--danger) !important;
+    background: rgba(248,113,113,0.1) !important;
+    color: var(--danger) !important;
+  }
+
+  .action-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+
+  .btn-cek {
+    background: #38bdf8;
+    color: #080c14; border: none;
+    border-radius: 10px; padding: 9px 22px;
+    font-size: 13px; font-weight: 700;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-cek:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(56,189,248,0.3); }
+  .btn-cek:disabled { opacity: 0.3; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-nyerah {
+    background: transparent;
+    border: 1.5px solid #f59e0b;
+    color: #f59e0b;
+    border-radius: 10px; padding: 9px 22px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-nyerah:hover { background: rgba(245,158,11,0.1); }
+  .btn-nyerah:disabled { opacity: 0.3; cursor: not-allowed; }
+
+  .pembahasan {
+    margin-top: 14px;
+    border-radius: 10px; padding: 14px;
+    display: none;
+  }
+  .pembahasan.show { display: block; animation: fadeUp 0.3s ease; }
+
+  .pembahasan-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+
+  .pembahasan-rumus {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px; padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; line-height: 1.9; color: #94a3b8;
+    white-space: pre-wrap; margin-bottom: 10px;
+  }
+
+  .pembahasan-ans {
+    font-size: 13px; font-weight: 600;
+  }
+
+  /* ── SCORE BAR ── */
+  .score-section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+    text-align: center; margin-top: 32px;
+  }
+
+  .score-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px; font-weight: 800;
+    line-height: 1;
+  }
+
+  .score-bar-wrap {
+    background: rgba(0,0,0,0.4); border-radius: 99px;
+    height: 10px; margin: 16px 0 8px; overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%; border-radius: 99px;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ── DIVIDER ── */
+  .big-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 99;
+    background: rgba(8,12,20,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 16px; color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex; gap: 4px;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    padding: 6px 12px; border-radius: 8px;
+    font-size: 12px; font-weight: 600; color: var(--muted);
+    text-decoration: none; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* ── COLOR OVERRIDES PER SECTION ── */
+  .sec-bilangan .section-icon { background: rgba(56,189,248,0.15); }
+  .sec-bilangan .section-title { color: var(--bilangan); }
+  .sec-bilangan .section-line { background: var(--bilangan); }
+  .sec-bilangan .formula-card::before { background: var(--bilangan); }
+  .sec-bilangan .formula-label { color: var(--bilangan); }
+  .sec-bilangan .example-tag { background: rgba(56,189,248,0.15); color: var(--bilangan); }
+  .sec-bilangan .example-steps { border-color: var(--bilangan); }
+  .sec-bilangan .example-ans { color: var(--bilangan); }
+  .sec-bilangan .soal-topic-tag { background: rgba(56,189,248,0.15); color: var(--bilangan); }
+  .sec-bilangan .btn-cek { background: var(--bilangan); }
+  .sec-bilangan .pembahasan { background: rgba(56,189,248,0.07); border-left: 3px solid var(--bilangan); }
+  .sec-bilangan .pembahasan-title { color: var(--bilangan); }
+  .sec-bilangan .pembahasan-ans { color: var(--bilangan); }
+
+  .sec-aljabar .section-icon { background: rgba(52,211,153,0.15); }
+  .sec-aljabar .section-title { color: var(--aljabar); }
+  .sec-aljabar .section-line { background: var(--aljabar); }
+  .sec-aljabar .formula-card::before { background: var(--aljabar); }
+  .sec-aljabar .formula-label { color: var(--aljabar); }
+  .sec-aljabar .example-tag { background: rgba(52,211,153,0.15); color: var(--aljabar); }
+  .sec-aljabar .example-steps { border-color: var(--aljabar); }
+  .sec-aljabar .example-ans { color: var(--aljabar); }
+  .sec-aljabar .soal-topic-tag { background: rgba(52,211,153,0.15); color: var(--aljabar); }
+  .sec-aljabar .btn-cek { background: var(--aljabar); }
+  .sec-aljabar .pembahasan { background: rgba(52,211,153,0.07); border-left: 3px solid var(--aljabar); }
+  .sec-aljabar .pembahasan-title { color: var(--aljabar); }
+  .sec-aljabar .pembahasan-ans { color: var(--aljabar); }
+
+  .sec-geometri .section-icon { background: rgba(251,146,60,0.15); }
+  .sec-geometri .section-title { color: var(--geometri); }
+  .sec-geometri .section-line { background: var(--geometri); }
+  .sec-geometri .formula-card::before { background: var(--geometri); }
+  .sec-geometri .formula-label { color: var(--geometri); }
+  .sec-geometri .example-tag { background: rgba(251,146,60,0.15); color: var(--geometri); }
+  .sec-geometri .example-steps { border-color: var(--geometri); }
+  .sec-geometri .example-ans { color: var(--geometri); }
+  .sec-geometri .soal-topic-tag { background: rgba(251,146,60,0.15); color: var(--geometri); }
+  .sec-geometri .btn-cek { background: var(--geometri); }
+  .sec-geometri .pembahasan { background: rgba(251,146,60,0.07); border-left: 3px solid var(--geometri); }
+  .sec-geometri .pembahasan-title { color: var(--geometri); }
+  .sec-geometri .pembahasan-ans { color: var(--geometri); }
+
+  .sec-statistika .section-icon { background: rgba(192,132,252,0.15); }
+  .sec-statistika .section-title { color: var(--statistika); }
+  .sec-statistika .section-line { background: var(--statistika); }
+  .sec-statistika .formula-card::before { background: var(--statistika); }
+  .sec-statistika .formula-label { color: var(--statistika); }
+  .sec-statistika .example-tag { background: rgba(192,132,252,0.15); color: var(--statistika); }
+  .sec-statistika .example-steps { border-color: var(--statistika); }
+  .sec-statistika .example-ans { color: var(--statistika); }
+  .sec-statistika .soal-topic-tag { background: rgba(192,132,252,0.15); color: var(--statistika); }
+  .sec-statistika .btn-cek { background: var(--statistika); color: #080c14; }
+  .sec-statistika .pembahasan { background: rgba(192,132,252,0.07); border-left: 3px solid var(--statistika); }
+  .sec-statistika .pembahasan-title { color: var(--statistika); }
+  .sec-statistika .pembahasan-ans { color: var(--statistika); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    h1 { letter-spacing: -1px; }
+    .formula-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-brand">📐 TKA MTK SMP</a>
+  <div class="nav-links">
+    <a href="#bilangan" class="nav-link">Bilangan</a>
+    <a href="#aljabar" class="nav-link">Aljabar</a>
+    <a href="#geometri" class="nav-link">Geometri</a>
+    <a href="#statistika" class="nav-link">Statistika</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero" style="padding-top:56px">
+  <div class="hero-glow"></div>
+  <div class="badge">🎯 TKA SMP · 6–16 April 2026</div>
+  <h1>Belajar MTK<br><span>Anti Bingung.</span></h1>
+  <p class="hero-sub">Rumus paling simpel + contoh soal + latihan interaktif. Klik Nyerah → langsung ketauan rumusnya 💡</p>
+  <div class="topic-pills">
+    <a href="#bilangan" class="pill pill-b">🔵 Bilangan</a>
+    <a href="#aljabar" class="pill pill-a">🟢 Aljabar</a>
+    <a href="#geometri" class="pill pill-g">🟠 Geometri</a>
+    <a href="#statistika" class="pill pill-s">🟣 Statistika & Peluang</a>
+  </div>
+  <div class="scroll-hint">↓ scroll untuk mulai belajar</div>
+</section>
+
+<hr class="big-divider">
+
+<!-- ═══════════════════════════════════
+     BILANGAN
+═══════════════════════════════════ -->
+<section class="section sec-bilangan" id="bilangan">
+  <div class="section-header">
+    <div class="section-icon">🔵</div>
+    <div>
+      <div class="section-title">Bilangan</div>
+      <div style="color:var(--muted);font-size:13px">Bulat · Pecahan · Perbandingan · Persentase</div>
+    </div>
+  </div>
+  <div class="section-line"></div>
+
+  <!-- RUMUS -->
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-label">Bilangan Bulat</div>
+      <div class="formula-name">Garis Bilangan</div>
+      <div class="formula-box">Makin ke KIRI = makin KECIL
+Makin ke KANAN = makin BESAR
+
+Contoh urutan:
+-15 < -8 < 0 < 5 < 20</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Operasi Hitung</div>
+      <div class="formula-name">Urutan Prioritas</div>
+      <div class="formula-box">① Kurung ( )
+② Pangkat / Akar
+③ × atau ÷  (kiri → kanan)
+④ + atau −  (kiri → kanan)
+
+(−) × (−) = (+)
+(+) × (−) = (−)</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Pecahan</div>
+      <div class="formula-name">Penjumlahan & Pengurangan</div>
+      <div class="formula-box">Samakan penyebut dulu (KPK)
+
+a/b + c/d = (ad + bc) / bd
+a/b × c/d = ac / bd
+a/b ÷ c/d = a/b × d/c</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Perbandingan</div>
+      <div class="formula-name">Bagian dari Total</div>
+      <div class="formula-box">a : b → total = a + b bagian
+
+Nilai A = (a / (a+b)) × Total
+Nilai B = (b / (a+b)) × Total</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Persentase</div>
+      <div class="formula-name">Diskon & Bunga</div>
+      <div class="formula-box">Diskon = % × Harga Awal
+Harga Akhir = Harga − Diskon
+
+Bunga = Modal × % × Waktu
+Untung% = (Untung/Modal) × 100%</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Skala & Rasio</div>
+      <div class="formula-name">Perbandingan Senilai</div>
+      <div class="formula-box">Skala = Jarak Peta / Jarak Asli
+
+Jika a/b = c/d maka:
+a × d = b × c
+(silang-kali)</div>
+    </div>
+  </div>
+
+  <!-- CONTOH SOAL -->
+  <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">📌 Contoh Soal Bilangan</div>
+  <div class="example-card">
+    <span class="example-tag">Bilangan Bulat</span>
+    <div class="example-q">Andi: −8, Budi: 5, Cici: −12, Dani: 3. Urutkaan dari TERENDAH ke TERTINGGI!</div>
+    <div class="example-steps">Pakai garis bilangan → kiri = kecil
+Urutkan: −12, −8, 3, 5</div>
+    <div class="example-ans">✅ Jawaban: Cici(−12), Andi(−8), Dani(3), Budi(5)</div>
+  </div>
+  <div class="example-card">
+    <span class="example-tag">Persentase</span>
+    <div class="example-q">Harga baju Rp120.000, diskon 25%. Berapa harga setelah diskon?</div>
+    <div class="example-steps">Diskon = 25% × 120.000 = 30.000
+Harga akhir = 120.000 − 30.000</div>
+    <div class="example-ans">✅ Jawaban: Rp 90.000</div>
+  </div>
+
+  <!-- LATIHAN -->
+  <div class="latihan-title">🏋️ Latihan Bilangan</div>
+
+  <!-- Soal B1 -->
+  <div class="soal-card sec-bilangan" id="card-b1">
+    <div class="soal-meta">
+      <span class="soal-num">B-01</span>
+      <span class="soal-topic-tag">Bilangan Bulat</span>
+      <span class="soal-status" id="st-b1"></span>
+    </div>
+    <div class="soal-q">Hasil dari (−6) × (−4) + 18 ÷ (−3) adalah…</div>
+    <div class="options" id="opts-b1">
+      <button class="option-btn" onclick="pilih('b1',0)">A. 30</button>
+      <button class="option-btn" onclick="pilih('b1',1)">B. 18</button>
+      <button class="option-btn" onclick="pilih('b1',2)">C. 26</button>
+      <button class="option-btn" onclick="pilih('b1',3)">D. 24</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-b1" onclick="cek('b1')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-b1" onclick="nyerah('b1')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-b1">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Urutan: kerjakan × dan ÷ dulu, lalu + dan −
+(−6) × (−4) = 24   ← (−)×(−) = (+)
+18 ÷ (−3)   = −6   ← (+)÷(−) = (−)
+Hasil: 24 + (−6) = 18</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 18</div>
+    </div>
+  </div>
+
+  <!-- Soal B2 -->
+  <div class="soal-card sec-bilangan" id="card-b2">
+    <div class="soal-meta">
+      <span class="soal-num">B-02</span>
+      <span class="soal-topic-tag">Pecahan</span>
+      <span class="soal-status" id="st-b2"></span>
+    </div>
+    <div class="soal-q">Hasil dari ¾ + ⅔ adalah…</div>
+    <div class="options" id="opts-b2">
+      <button class="option-btn" onclick="pilih('b2',0)">A. 5/6</button>
+      <button class="option-btn" onclick="pilih('b2',1)">B. 7/12</button>
+      <button class="option-btn" onclick="pilih('b2',2)">C. 17/12</button>
+      <button class="option-btn" onclick="pilih('b2',3)">D. 3/2</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-b2" onclick="cek('b2')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-b2" onclick="nyerah('b2')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-b2">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">KPK dari 4 dan 3 = 12  (samakan penyebut)
+¾  = 9/12
+⅔  = 8/12
+―――――
+9/12 + 8/12 = 17/12</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 17/12</div>
+    </div>
+  </div>
+
+  <!-- Soal B3 -->
+  <div class="soal-card sec-bilangan" id="card-b3">
+    <div class="soal-meta">
+      <span class="soal-num">B-03</span>
+      <span class="soal-topic-tag">Perbandingan</span>
+      <span class="soal-status" id="st-b3"></span>
+    </div>
+    <div class="soal-q">Uang Ani : Budi = 3 : 5. Jika uang Budi Rp75.000, berapa uang Ani?</div>
+    <div class="options" id="opts-b3">
+      <button class="option-btn" onclick="pilih('b3',0)">A. Rp 45.000</button>
+      <button class="option-btn" onclick="pilih('b3',1)">B. Rp 25.000</button>
+      <button class="option-btn" onclick="pilih('b3',2)">C. Rp 30.000</button>
+      <button class="option-btn" onclick="pilih('b3',3)">D. Rp 35.000</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-b3" onclick="cek('b3')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-b3" onclick="nyerah('b3')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-b3">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Budi = 5 bagian = Rp 75.000
+1 bagian = 75.000 ÷ 5 = 15.000
+Ani   = 3 bagian = 3 × 15.000 = Rp 45.000</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: A. Rp 45.000</div>
+    </div>
+  </div>
+
+  <!-- Soal B4 -->
+  <div class="soal-card sec-bilangan" id="card-b4">
+    <div class="soal-meta">
+      <span class="soal-num">B-04</span>
+      <span class="soal-topic-tag">Persentase</span>
+      <span class="soal-status" id="st-b4"></span>
+    </div>
+    <div class="soal-q">Modal Rp 200.000, untung 15%. Berapa harga jualnya?</div>
+    <div class="options" id="opts-b4">
+      <button class="option-btn" onclick="pilih('b4',0)">A. Rp 215.000</button>
+      <button class="option-btn" onclick="pilih('b4',1)">B. Rp 220.000</button>
+      <button class="option-btn" onclick="pilih('b4',2)">C. Rp 230.000</button>
+      <button class="option-btn" onclick="pilih('b4',3)">D. Rp 240.000</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-b4" onclick="cek('b4')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-b4" onclick="nyerah('b4')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-b4">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Untung = 15% × 200.000 = 30.000
+Harga jual = Modal + Untung
+           = 200.000 + 30.000 = Rp 230.000</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. Rp 230.000</div>
+    </div>
+  </div>
+
+  <!-- Soal B5 -->
+  <div class="soal-card sec-bilangan" id="card-b5">
+    <div class="soal-meta">
+      <span class="soal-num">B-05</span>
+      <span class="soal-topic-tag">Skala</span>
+      <span class="soal-status" id="st-b5"></span>
+    </div>
+    <div class="soal-q">Peta berskala 1 : 500.000. Jarak di peta 4 cm. Berapa jarak aslinya (km)?</div>
+    <div class="options" id="opts-b5">
+      <button class="option-btn" onclick="pilih('b5',0)">A. 10 km</button>
+      <button class="option-btn" onclick="pilih('b5',1)">B. 15 km</button>
+      <button class="option-btn" onclick="pilih('b5',2)">C. 20 km</button>
+      <button class="option-btn" onclick="pilih('b5',3)">D. 25 km</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-b5" onclick="cek('b5')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-b5" onclick="nyerah('b5')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-b5">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Skala = Jarak Peta / Jarak Asli
+Jarak Asli = Jarak Peta / Skala
+           = 4 cm ÷ (1/500.000)
+           = 4 × 500.000 = 2.000.000 cm
+           = 20 km</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 20 km</div>
+    </div>
+  </div>
+
+  <!-- SKOR BILANGAN -->
+  <div class="score-section" id="score-bilangan" style="display:none">
+    <div style="color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Skor Bilangan</div>
+    <div class="score-big" id="skor-bil-txt" style="color:var(--bilangan)">0/5</div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-bil" style="width:0%;background:var(--bilangan)"></div></div>
+    <div id="skor-bil-msg" style="color:var(--muted);font-size:13px"></div>
+  </div>
+</section>
+
+<hr class="big-divider">
+
+<!-- ═══════════════════════════════════
+     ALJABAR
+═══════════════════════════════════ -->
+<section class="section sec-aljabar" id="aljabar">
+  <div class="section-header">
+    <div class="section-icon">🟢</div>
+    <div>
+      <div class="section-title">Aljabar</div>
+      <div style="color:var(--muted);font-size:13px">Linear · Fungsi · Barisan & Deret</div>
+    </div>
+  </div>
+  <div class="section-line"></div>
+
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-label">Bentuk Aljabar</div>
+      <div class="formula-name">Sederhanakan</div>
+      <div class="formula-box">Kumpulkan suku SEJENIS saja!
+
+3x + 5y − x + 2y
+= (3x − x) + (5y + 2y)
+= 2x + 7y</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Persamaan Linear</div>
+      <div class="formula-name">Cari Nilai x</div>
+      <div class="formula-box">ax + b = c
+→ x = (c − b) / a
+
+Contoh: 3x − 7 = 14
+3x = 21 → x = 7</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Pertidaksamaan</div>
+      <div class="formula-name">Tanda Berubah jika × / ÷ Negatif</div>
+      <div class="formula-box">2x + 3 > 11
+2x > 8
+x > 4
+
+⚠️ Kalau dikali/bagi bilangan
+NEGATIF → tanda BALIK arah!</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Fungsi</div>
+      <div class="formula-name">f(x) = …</div>
+      <div class="formula-box">f(x) = 2x + 3
+→ masukkan nilai x
+
+f(5) = 2(5) + 3 = 13
+f(0) = 2(0) + 3 = 3</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Barisan Aritmatika</div>
+      <div class="formula-name">Suku ke-n</div>
+      <div class="formula-box">Un = a + (n − 1) × b
+
+a = suku pertama
+b = beda (selisih tiap suku)
+n = nomor suku yang dicari</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">SPLDV (2 Variabel)</div>
+      <div class="formula-name">Eliminasi atau Substitusi</div>
+      <div class="formula-box">x + y = 10  ...(1)
+x − y = 2   ...(2)
+(1)+(2): 2x = 12 → x = 6
+Masuk ke (1): y = 4</div>
+    </div>
+  </div>
+
+  <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">📌 Contoh Soal Aljabar</div>
+  <div class="example-card">
+    <span class="example-tag">Persamaan Linear</span>
+    <div class="example-q">Jika 4x − 3 = 17, berapa nilai x?</div>
+    <div class="example-steps">4x = 17 + 3 = 20
+x  = 20 ÷ 4 = 5</div>
+    <div class="example-ans">✅ Jawaban: x = 5</div>
+  </div>
+  <div class="example-card">
+    <span class="example-tag">Barisan Aritmatika</span>
+    <div class="example-q">Barisan: 2, 5, 8, 11, … Suku ke-10?</div>
+    <div class="example-steps">a = 2,  b = 5 − 2 = 3
+U10 = 2 + (10−1) × 3
+    = 2 + 27 = 29</div>
+    <div class="example-ans">✅ Jawaban: 29</div>
+  </div>
+
+  <div class="latihan-title">🏋️ Latihan Aljabar</div>
+
+  <!-- A1 -->
+  <div class="soal-card sec-aljabar" id="card-a1">
+    <div class="soal-meta"><span class="soal-num">A-01</span><span class="soal-topic-tag">Bentuk Aljabar</span><span class="soal-status" id="st-a1"></span></div>
+    <div class="soal-q">Bentuk sederhana dari 5x + 4y − 2x + 3y adalah…</div>
+    <div class="options" id="opts-a1">
+      <button class="option-btn" onclick="pilih('a1',0)">A. 7x + 3y</button>
+      <button class="option-btn" onclick="pilih('a1',1)">B. 3x + 7y</button>
+      <button class="option-btn" onclick="pilih('a1',2)">C. 3x + y</button>
+      <button class="option-btn" onclick="pilih('a1',3)">D. 7x + 7y</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-a1" onclick="cek('a1')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-a1" onclick="nyerah('a1')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-a1">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Kumpulkan suku sejenis:
+5x − 2x = 3x
+4y + 3y = 7y
+Hasil: 3x + 7y</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 3x + 7y</div>
+    </div>
+  </div>
+
+  <!-- A2 -->
+  <div class="soal-card sec-aljabar" id="card-a2">
+    <div class="soal-meta"><span class="soal-num">A-02</span><span class="soal-topic-tag">Persamaan Linear</span><span class="soal-status" id="st-a2"></span></div>
+    <div class="soal-q">Jika 2x + 9 = 25, nilai x adalah…</div>
+    <div class="options" id="opts-a2">
+      <button class="option-btn" onclick="pilih('a2',0)">A. 6</button>
+      <button class="option-btn" onclick="pilih('a2',1)">B. 7</button>
+      <button class="option-btn" onclick="pilih('a2',2)">C. 8</button>
+      <button class="option-btn" onclick="pilih('a2',3)">D. 9</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-a2" onclick="cek('a2')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-a2" onclick="nyerah('a2')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-a2">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">2x + 9 = 25
+2x = 25 − 9 = 16
+x  = 16 ÷ 2 = 8</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 8</div>
+    </div>
+  </div>
+
+  <!-- A3 -->
+  <div class="soal-card sec-aljabar" id="card-a3">
+    <div class="soal-meta"><span class="soal-num">A-03</span><span class="soal-topic-tag">Pertidaksamaan</span><span class="soal-status" id="st-a3"></span></div>
+    <div class="soal-q">Nilai x yang memenuhi 3x − 4 ≥ 11 adalah…</div>
+    <div class="options" id="opts-a3">
+      <button class="option-btn" onclick="pilih('a3',0)">A. x ≥ 4</button>
+      <button class="option-btn" onclick="pilih('a3',1)">B. x ≥ 5</button>
+      <button class="option-btn" onclick="pilih('a3',2)">C. x ≤ 5</button>
+      <button class="option-btn" onclick="pilih('a3',3)">D. x ≥ 6</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-a3" onclick="cek('a3')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-a3" onclick="nyerah('a3')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-a3">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">3x − 4 ≥ 11
+3x ≥ 11 + 4
+3x ≥ 15
+x  ≥ 5</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. x ≥ 5</div>
+    </div>
+  </div>
+
+  <!-- A4 -->
+  <div class="soal-card sec-aljabar" id="card-a4">
+    <div class="soal-meta"><span class="soal-num">A-04</span><span class="soal-topic-tag">Fungsi</span><span class="soal-status" id="st-a4"></span></div>
+    <div class="soal-q">Diketahui f(x) = 3x − 5. Nilai f(6) adalah…</div>
+    <div class="options" id="opts-a4">
+      <button class="option-btn" onclick="pilih('a4',0)">A. 11</button>
+      <button class="option-btn" onclick="pilih('a4',1)">B. 13</button>
+      <button class="option-btn" onclick="pilih('a4',2)">C. 14</button>
+      <button class="option-btn" onclick="pilih('a4',3)">D. 18</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-a4" onclick="cek('a4')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-a4" onclick="nyerah('a4')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-a4">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">f(x) = 3x − 5
+f(6) = 3(6) − 5
+     = 18 − 5 = 13</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 13</div>
+    </div>
+  </div>
+
+  <!-- A5 -->
+  <div class="soal-card sec-aljabar" id="card-a5">
+    <div class="soal-meta"><span class="soal-num">A-05</span><span class="soal-topic-tag">Barisan Aritmatika</span><span class="soal-status" id="st-a5"></span></div>
+    <div class="soal-q">Barisan: 4, 9, 14, 19, … Suku ke-12 adalah…</div>
+    <div class="options" id="opts-a5">
+      <button class="option-btn" onclick="pilih('a5',0)">A. 55</button>
+      <button class="option-btn" onclick="pilih('a5',1)">B. 59</button>
+      <button class="option-btn" onclick="pilih('a5',2)">C. 60</button>
+      <button class="option-btn" onclick="pilih('a5',3)">D. 64</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-a5" onclick="cek('a5')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-a5" onclick="nyerah('a5')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-a5">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">a = 4,  b = 9 − 4 = 5
+Un = a + (n−1) × b
+U12 = 4 + (12−1) × 5
+    = 4 + 55 = 59</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 59</div>
+    </div>
+  </div>
+
+  <div class="score-section" id="score-aljabar" style="display:none">
+    <div style="color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Skor Aljabar</div>
+    <div class="score-big" id="skor-alj-txt" style="color:var(--aljabar)">0/5</div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-alj" style="width:0%;background:var(--aljabar)"></div></div>
+    <div id="skor-alj-msg" style="color:var(--muted);font-size:13px"></div>
+  </div>
+</section>
+
+<hr class="big-divider">
+
+<!-- ═══════════════════════════════════
+     GEOMETRI
+═══════════════════════════════════ -->
+<section class="section sec-geometri" id="geometri">
+  <div class="section-header">
+    <div class="section-icon">🟠</div>
+    <div>
+      <div class="section-title">Geometri</div>
+      <div style="color:var(--muted);font-size:13px">Luas · Keliling · Pythagoras · Transformasi</div>
+    </div>
+  </div>
+  <div class="section-line"></div>
+
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-label">Persegi & Persegi Panjang</div>
+      <div class="formula-name">Luas & Keliling</div>
+      <div class="formula-box">Persegi Panjang:
+  Luas     = p × l
+  Keliling = 2 × (p + l)
+
+Persegi (p = l = s):
+  Luas     = s²
+  Keliling = 4s</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Segitiga</div>
+      <div class="formula-name">Luas & Keliling</div>
+      <div class="formula-box">Luas     = ½ × alas × tinggi
+Keliling = jumlah ketiga sisi
+
+Segitiga siku-siku:
+  c² = a² + b²  (Pythagoras)
+  c  = √(a² + b²)</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Lingkaran</div>
+      <div class="formula-name">Luas & Keliling</div>
+      <div class="formula-box">π ≈ 22/7 atau 3,14
+
+Luas     = π × r²
+Keliling = 2 × π × r
+         = π × d   (d = diameter)</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Trapesium</div>
+      <div class="formula-name">Luas</div>
+      <div class="formula-box">Luas = ½ × (a + b) × t
+
+a = sisi sejajar atas
+b = sisi sejajar bawah
+t = tinggi trapesium</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Transformasi</div>
+      <div class="formula-name">Translasi (Geser)</div>
+      <div class="formula-box">Titik (x, y) digeser (a, b):
+→ Bayangan = (x+a, y+b)
+
+Contoh: A(3,4) geser (2,−1)
+→ A'(3+2, 4−1) = A'(5, 3)</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Volume</div>
+      <div class="formula-name">Bangun Ruang Dasar</div>
+      <div class="formula-box">Kubus:       V = s³
+Balok:       V = p × l × t
+Silinder:    V = π × r² × t
+Prisma:      V = Luas alas × t</div>
+    </div>
+  </div>
+
+  <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">📌 Contoh Soal Geometri</div>
+  <div class="example-card">
+    <span class="example-tag">Pythagoras</span>
+    <div class="example-q">Segitiga siku-siku, sisi 6 cm dan 8 cm. Cari sisi miring!</div>
+    <div class="example-steps">c² = 6² + 8²
+   = 36 + 64 = 100
+c  = √100 = 10 cm</div>
+    <div class="example-ans">✅ Jawaban: 10 cm</div>
+  </div>
+  <div class="example-card">
+    <span class="example-tag">Gabungan Bangun</span>
+    <div class="example-q">Tanah 15m×10m, taman lingkaran d=7m. Luas tanah sisa? (π=22/7)</div>
+    <div class="example-steps">Luas tanah     = 15 × 10 = 150 m²
+r lingkaran   = 7 ÷ 2 = 3,5 m
+Luas lingkaran = 22/7 × 3,5² = 38,5 m²
+Sisa           = 150 − 38,5 = 111,5 m²</div>
+    <div class="example-ans">✅ Jawaban: 111,5 m²</div>
+  </div>
+
+  <div class="latihan-title">🏋️ Latihan Geometri</div>
+
+  <!-- G1 -->
+  <div class="soal-card sec-geometri" id="card-g1">
+    <div class="soal-meta"><span class="soal-num">G-01</span><span class="soal-topic-tag">Persegi Panjang</span><span class="soal-status" id="st-g1"></span></div>
+    <div class="soal-q">Persegi panjang dengan panjang 14 cm dan lebar 9 cm. Keliling dan luasnya adalah…</div>
+    <div class="options" id="opts-g1">
+      <button class="option-btn" onclick="pilih('g1',0)">A. K=46cm, L=126cm²</button>
+      <button class="option-btn" onclick="pilih('g1',1)">B. K=46cm, L=126cm²</button>
+      <button class="option-btn" onclick="pilih('g1',2)">C. K=46cm, L=126cm²</button>
+      <button class="option-btn" onclick="pilih('g1',3)">D. K=46cm, L=126cm²</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-g1" onclick="cek('g1')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-g1" onclick="nyerah('g1')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-g1">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Keliling = 2 × (p + l)
+        = 2 × (14 + 9) = 2 × 23 = 46 cm
+Luas     = p × l
+        = 14 × 9 = 126 cm²</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: A. K=46cm, L=126cm²</div>
+    </div>
+  </div>
+
+  <!-- G2 -->
+  <div class="soal-card sec-geometri" id="card-g2">
+    <div class="soal-meta"><span class="soal-num">G-02</span><span class="soal-topic-tag">Lingkaran</span><span class="soal-status" id="st-g2"></span></div>
+    <div class="soal-q">Lingkaran berjari-jari 14 cm. Luas lingkaran tersebut adalah… (π = 22/7)</div>
+    <div class="options" id="opts-g2">
+      <button class="option-btn" onclick="pilih('g2',0)">A. 528 cm²</button>
+      <button class="option-btn" onclick="pilih('g2',1)">B. 616 cm²</button>
+      <button class="option-btn" onclick="pilih('g2',2)">C. 154 cm²</button>
+      <button class="option-btn" onclick="pilih('g2',3)">D. 308 cm²</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-g2" onclick="cek('g2')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-g2" onclick="nyerah('g2')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-g2">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Luas = π × r²
+     = 22/7 × 14²
+     = 22/7 × 196
+     = 22 × 28 = 616 cm²</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 616 cm²</div>
+    </div>
+  </div>
+
+  <!-- G3 -->
+  <div class="soal-card sec-geometri" id="card-g3">
+    <div class="soal-meta"><span class="soal-num">G-03</span><span class="soal-topic-tag">Pythagoras</span><span class="soal-status" id="st-g3"></span></div>
+    <div class="soal-q">Segitiga siku-siku dengan sisi 5 cm dan 12 cm. Sisi miringnya adalah…</div>
+    <div class="options" id="opts-g3">
+      <button class="option-btn" onclick="pilih('g3',0)">A. 11 cm</button>
+      <button class="option-btn" onclick="pilih('g3',1)">B. 12 cm</button>
+      <button class="option-btn" onclick="pilih('g3',2)">C. 13 cm</button>
+      <button class="option-btn" onclick="pilih('g3',3)">D. 15 cm</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-g3" onclick="cek('g3')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-g3" onclick="nyerah('g3')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-g3">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">c² = a² + b²
+   = 5² + 12²
+   = 25 + 144 = 169
+c  = √169 = 13 cm</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 13 cm</div>
+    </div>
+  </div>
+
+  <!-- G4 -->
+  <div class="soal-card sec-geometri" id="card-g4">
+    <div class="soal-meta"><span class="soal-num">G-04</span><span class="soal-topic-tag">Transformasi</span><span class="soal-status" id="st-g4"></span></div>
+    <div class="soal-q">Titik P(4, −2) ditranslasikan oleh (−3, 5). Koordinat bayangan P adalah…</div>
+    <div class="options" id="opts-g4">
+      <button class="option-btn" onclick="pilih('g4',0)">A. (1, 3)</button>
+      <button class="option-btn" onclick="pilih('g4',1)">B. (7, 3)</button>
+      <button class="option-btn" onclick="pilih('g4',2)">C. (1, −7)</button>
+      <button class="option-btn" onclick="pilih('g4',3)">D. (−1, 3)</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-g4" onclick="cek('g4')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-g4" onclick="nyerah('g4')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-g4">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Translasi (a,b): tambahkan ke koordinat
+x' = 4 + (−3) = 1
+y' = −2 + 5   = 3
+Bayangan P' = (1, 3)</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: A. (1, 3)</div>
+    </div>
+  </div>
+
+  <!-- G5 -->
+  <div class="soal-card sec-geometri" id="card-g5">
+    <div class="soal-meta"><span class="soal-num">G-05</span><span class="soal-topic-tag">Volume</span><span class="soal-status" id="st-g5"></span></div>
+    <div class="soal-q">Balok dengan panjang 8 cm, lebar 5 cm, tinggi 4 cm. Volumenya adalah…</div>
+    <div class="options" id="opts-g5">
+      <button class="option-btn" onclick="pilih('g5',0)">A. 120 cm³</button>
+      <button class="option-btn" onclick="pilih('g5',1)">B. 140 cm³</button>
+      <button class="option-btn" onclick="pilih('g5',2)">C. 160 cm³</button>
+      <button class="option-btn" onclick="pilih('g5',3)">D. 180 cm³</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-g5" onclick="cek('g5')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-g5" onclick="nyerah('g5')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-g5">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Volume balok = p × l × t
+             = 8 × 5 × 4
+             = 160 cm³</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 160 cm³</div>
+    </div>
+  </div>
+
+  <div class="score-section" id="score-geometri" style="display:none">
+    <div style="color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Skor Geometri</div>
+    <div class="score-big" id="skor-geo-txt" style="color:var(--geometri)">0/5</div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-geo" style="width:0%;background:var(--geometri)"></div></div>
+    <div id="skor-geo-msg" style="color:var(--muted);font-size:13px"></div>
+  </div>
+</section>
+
+<hr class="big-divider">
+
+<!-- ═══════════════════════════════════
+     STATISTIKA & PELUANG
+═══════════════════════════════════ -->
+<section class="section sec-statistika" id="statistika">
+  <div class="section-header">
+    <div class="section-icon">🟣</div>
+    <div>
+      <div class="section-title">Statistika & Peluang</div>
+      <div style="color:var(--muted);font-size:13px">Mean · Median · Modus · Peluang</div>
+    </div>
+  </div>
+  <div class="section-line"></div>
+
+  <div class="formula-grid">
+    <div class="formula-card">
+      <div class="formula-label">Mean (Rata-rata)</div>
+      <div class="formula-name">Rumus Paling Simpel</div>
+      <div class="formula-box">Mean = Jumlah semua data
+       ÷ Banyak data
+
+Contoh: 70, 80, 90
+Jumlah = 240, n = 3
+Mean   = 240 ÷ 3 = 80</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Median</div>
+      <div class="formula-name">Nilai Tengah</div>
+      <div class="formula-box">① Urutkan data dulu!
+② Jika n ganjil → data ke-(n+1)/2
+③ Jika n genap  → rata-rata 2 data tengah
+
+Contoh: 2, 4, 5, 7, 9 (n=5)
+Median = data ke-3 = 5</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Modus</div>
+      <div class="formula-name">Nilai Paling Sering Muncul</div>
+      <div class="formula-box">Hitung frekuensi tiap nilai.
+Modus = nilai dengan frekuensi TERBANYAK.
+
+Contoh: 6, 7, 7, 8, 7, 9
+7 muncul 3× → Modus = 7</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Jangkauan</div>
+      <div class="formula-name">Sebaran Data</div>
+      <div class="formula-box">Jangkauan = Nilai Terbesar
+           − Nilai Terkecil
+
+Contoh: data 3, 7, 12, 5, 9
+Terbesar = 12, Terkecil = 3
+Jangkauan = 12 − 3 = 9</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Peluang</div>
+      <div class="formula-name">Rumus Dasar</div>
+      <div class="formula-box">P(A) = n(A) / n(S)
+
+n(A) = banyak kejadian A
+n(S) = total semua kemungkinan
+
+Nilai P antara 0 dan 1
+(0 = mustahil, 1 = pasti)</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-label">Diagram & Tabel</div>
+      <div class="formula-name">Baca dengan Teliti</div>
+      <div class="formula-box">Cara baca diagram batang/lingkaran:
+① Cari nilai dari sumbu/label
+② Bandingkan antar data
+③ Hitung total / selisih sesuai soal
+④ Jangan terburu-buru!</div>
+    </div>
+  </div>
+
+  <div style="color:var(--muted);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px">📌 Contoh Soal Statistika</div>
+  <div class="example-card">
+    <span class="example-tag">Mean</span>
+    <div class="example-q">Nilai 5 siswa: 70, 80, 65, 90, 75. Rata-ratanya?</div>
+    <div class="example-steps">Jumlah = 70+80+65+90+75 = 380
+Mean   = 380 ÷ 5 = 76</div>
+    <div class="example-ans">✅ Jawaban: 76</div>
+  </div>
+  <div class="example-card">
+    <span class="example-tag">Peluang</span>
+    <div class="example-q">Sebuah dadu dilempar. Peluang muncul bilangan prima?</div>
+    <div class="example-steps">Prima di dadu: 2, 3, 5 → ada 3
+Total sisi: 6
+P = 3/6 = 1/2</div>
+    <div class="example-ans">✅ Jawaban: 1/2</div>
+  </div>
+
+  <div class="latihan-title">🏋️ Latihan Statistika & Peluang</div>
+
+  <!-- S1 -->
+  <div class="soal-card sec-statistika" id="card-s1">
+    <div class="soal-meta"><span class="soal-num">S-01</span><span class="soal-topic-tag">Mean</span><span class="soal-status" id="st-s1"></span></div>
+    <div class="soal-q">Nilai ulangan: 60, 70, 80, 75, 65. Rata-rata nilai tersebut adalah…</div>
+    <div class="options" id="opts-s1">
+      <button class="option-btn" onclick="pilih('s1',0)">A. 68</button>
+      <button class="option-btn" onclick="pilih('s1',1)">B. 70</button>
+      <button class="option-btn" onclick="pilih('s1',2)">C. 72</button>
+      <button class="option-btn" onclick="pilih('s1',3)">D. 74</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-s1" onclick="cek('s1')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-s1" onclick="nyerah('s1')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-s1">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Mean = Jumlah ÷ Banyak data
+     = (60+70+80+75+65) ÷ 5
+     = 350 ÷ 5 = 70</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 70</div>
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="soal-card sec-statistika" id="card-s2">
+    <div class="soal-meta"><span class="soal-num">S-02</span><span class="soal-topic-tag">Median</span><span class="soal-status" id="st-s2"></span></div>
+    <div class="soal-q">Data: 9, 3, 7, 5, 11, 1, 6. Median dari data tersebut adalah…</div>
+    <div class="options" id="opts-s2">
+      <button class="option-btn" onclick="pilih('s2',0)">A. 5</button>
+      <button class="option-btn" onclick="pilih('s2',1)">B. 6</button>
+      <button class="option-btn" onclick="pilih('s2',2)">C. 7</button>
+      <button class="option-btn" onclick="pilih('s2',3)">D. 9</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-s2" onclick="cek('s2')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-s2" onclick="nyerah('s2')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-s2">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Urutkan dulu: 1, 3, 5, 6, 7, 9, 11
+n = 7 (ganjil)
+Posisi tengah = (7+1)/2 = ke-4
+Data ke-4 = 6</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 6</div>
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="soal-card sec-statistika" id="card-s3">
+    <div class="soal-meta"><span class="soal-num">S-03</span><span class="soal-topic-tag">Modus</span><span class="soal-status" id="st-s3"></span></div>
+    <div class="soal-q">Data nilai: 7, 8, 7, 9, 6, 8, 7, 6, 9, 7. Modus dari data tersebut adalah…</div>
+    <div class="options" id="opts-s3">
+      <button class="option-btn" onclick="pilih('s3',0)">A. 6</button>
+      <button class="option-btn" onclick="pilih('s3',1)">B. 7</button>
+      <button class="option-btn" onclick="pilih('s3',2)">C. 8</button>
+      <button class="option-btn" onclick="pilih('s3',3)">D. 9</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-s3" onclick="cek('s3')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-s3" onclick="nyerah('s3')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-s3">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Hitung frekuensi tiap nilai:
+6 → muncul 2×
+7 → muncul 4×  ← TERBANYAK
+8 → muncul 2×
+9 → muncul 2×
+Modus = 7</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: B. 7</div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="soal-card sec-statistika" id="card-s4">
+    <div class="soal-meta"><span class="soal-num">S-04</span><span class="soal-topic-tag">Peluang</span><span class="soal-status" id="st-s4"></span></div>
+    <div class="soal-q">Sebuah kantong berisi 4 bola merah, 3 bola biru, 5 bola hijau. Peluang terambil bola biru adalah…</div>
+    <div class="options" id="opts-s4">
+      <button class="option-btn" onclick="pilih('s4',0)">A. 1/4</button>
+      <button class="option-btn" onclick="pilih('s4',1)">B. 1/3</button>
+      <button class="option-btn" onclick="pilih('s4',2)">C. 3/12</button>
+      <button class="option-btn" onclick="pilih('s4',3)">D. 5/12</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-s4" onclick="cek('s4')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-s4" onclick="nyerah('s4')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-s4">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">P(biru) = n(biru) / n(total)
+Total bola = 4 + 3 + 5 = 12
+P(biru) = 3/12 = 1/4</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: A. 1/4</div>
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="soal-card sec-statistika" id="card-s5">
+    <div class="soal-meta"><span class="soal-num">S-05</span><span class="soal-topic-tag">Peluang Dadu</span><span class="soal-status" id="st-s5"></span></div>
+    <div class="soal-q">Dua koin dilempar bersamaan. Peluang muncul keduanya ANGKA adalah…</div>
+    <div class="options" id="opts-s5">
+      <button class="option-btn" onclick="pilih('s5',0)">A. 1/2</button>
+      <button class="option-btn" onclick="pilih('s5',1)">B. 1/3</button>
+      <button class="option-btn" onclick="pilih('s5',2)">C. 1/4</button>
+      <button class="option-btn" onclick="pilih('s5',3)">D. 2/3</button>
+    </div>
+    <div class="action-row">
+      <button class="btn-cek" id="cek-s5" onclick="cek('s5')" disabled>Cek Jawaban</button>
+      <button class="btn-nyerah" id="nyerah-s5" onclick="nyerah('s5')">😮‍💨 Nyerah</button>
+    </div>
+    <div class="pembahasan" id="pb-s5">
+      <div class="pembahasan-title">💡 Rumus & Pembahasan</div>
+      <div class="pembahasan-rumus">Ruang sampel 2 koin:
+{AA, AG, GA, GG} → total 4
+Keduanya Angka = {AA} → 1
+
+P(AA) = 1/4</div>
+      <div class="pembahasan-ans">✅ Jawaban benar: C. 1/4</div>
+    </div>
+  </div>
+
+  <div class="score-section" id="score-statistika" style="display:none">
+    <div style="color:var(--muted);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Skor Statistika</div>
+    <div class="score-big" id="skor-sta-txt" style="color:var(--statistika)">0/5</div>
+    <div class="score-bar-wrap"><div class="score-bar-fill" id="bar-sta" style="width:0%;background:var(--statistika)"></div></div>
+    <div id="skor-sta-msg" style="color:var(--muted);font-size:13px"></div>
+  </div>
+</section>
+
+<!-- FOOTER SKOR TOTAL -->
+<section class="section" id="skor-total-section" style="display:none">
+  <div style="background:linear-gradient(135deg,#0f1623,#141d2e);border:1px solid #1e2d45;border-radius:20px;padding:32px;text-align:center">
+    <div style="font-size:13px;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">🏆 Total Skor Keseluruhan</div>
+    <div class="score-big" id="skor-total-txt" style="background:linear-gradient(135deg,#38bdf8,#c084fc,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:64px">0/20</div>
+    <div class="score-bar-wrap" style="max-width:400px;margin:16px auto"><div class="score-bar-fill" id="bar-total" style="width:0%;background:linear-gradient(90deg,#38bdf8,#c084fc)"></div></div>
+    <div id="skor-total-msg" style="font-size:18px;font-weight:700;margin:12px 0;color:var(--text)"></div>
+    <div id="skor-total-sub" style="color:var(--muted);font-size:14px;margin-bottom:20px"></div>
+    <button onclick="resetSemua()" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:12px;padding:12px 32px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif">🔄 Ulangi Semua Latihan</button>
+  </div>
+</section>
+
+<div style="height:60px"></div>
+
+<!-- ── JS LOGIC ── -->
+<script>
+const ANSWERS = {
+  b1:1, b2:2, b3:0, b4:2, b5:2,
+  a1:1, a2:2, a3:1, a4:1, a5:1,
+  g1:0, g2:1, g3:2, g4:0, g5:2,
+  s1:1, s2:1, s3:1, s4:0, s5:2
+};
+
+const state = {};
+Object.keys(ANSWERS).forEach(k => { state[k] = { chosen: null, done: false }; });
+
+function pilih(id, idx) {
+  if (state[id].done) return;
+  state[id].chosen = idx;
+  const btns = document.querySelectorAll(`#opts-${id} .option-btn`);
+  btns.forEach((b, i) => {
+    b.classList.toggle('selected', i === idx);
+  });
+  document.getElementById(`cek-${id}`).disabled = false;
+}
+
+function cek(id) {
+  if (state[id].done || state[id].chosen === null) return;
+  finalize(id, false);
+}
+
+function nyerah(id) {
+  if (state[id].done) return;
+  state[id].chosen = -1;
+  finalize(id, true);
+}
+
+function finalize(id, surrendered) {
+  state[id].done = true;
+  const correct = ANSWERS[id];
+  const chosen = state[id].chosen;
+  const isCorrect = !surrendered && chosen === correct;
+
+  const card = document.getElementById(`card-${id}`);
+  const btns = document.querySelectorAll(`#opts-${id} .option-btn`);
+  const pb = document.getElementById(`pb-${id}`);
+  const st = document.getElementById(`st-${id}`);
+
+  btns.forEach((b, i) => {
+    b.disabled = true;
+    if (i === correct) b.classList.add('correct-ans');
+    else if (i === chosen && !isCorrect) b.classList.add('wrong-ans');
+  });
+
+  pb.classList.add('show');
+  document.getElementById(`cek-${id}`).disabled = true;
+  document.getElementById(`nyerah-${id}`).disabled = true;
+
+  if (surrendered) {
+    card.classList.add('surrendered');
+    st.textContent = '🏳️';
+  } else if (isCorrect) {
+    card.classList.add('correct');
+    st.textContent = '✅';
+  } else {
+    card.classList.add('wrong');
+    st.textContent = '❌';
+  }
+
+  updateSectionScore();
+}
+
+function getSectionIds(prefix) {
+  return Object.keys(ANSWERS).filter(k => k.startsWith(prefix));
+}
+
+function updateSectionScore() {
+  const sections = [
+    { prefix:'b', txt:'skor-bil-txt', bar:'bar-bil', msg:'skor-bil-msg', el:'score-bilangan' },
+    { prefix:'a', txt:'skor-alj-txt', bar:'bar-alj', msg:'skor-alj-msg', el:'score-aljabar' },
+    { prefix:'g', txt:'skor-geo-txt', bar:'bar-geo', msg:'skor-geo-msg', el:'score-geometri' },
+    { prefix:'s', txt:'skor-sta-txt', bar:'bar-sta', msg:'skor-sta-msg', el:'score-statistika' },
+  ];
+
+  let totalBenar = 0, totalDone = 0;
+
+  sections.forEach(sec => {
+    const ids = getSectionIds(sec.prefix);
+    const done = ids.filter(k => state[k].done);
+    const benar = ids.filter(k => state[k].done && !state[k].surrendered && state[k].chosen === ANSWERS[k]);
+
+    // recalc benar properly
+    const b2 = ids.filter(k => {
+      return state[k].done && state[k].chosen === ANSWERS[k];
+    }).length;
+
+    totalBenar += b2;
+    totalDone += done.length;
+
+    if (done.length === ids.length) {
+      const pct = Math.round((b2 / ids.length) * 100);
+      document.getElementById(sec.el).style.display = 'block';
+      document.getElementById(sec.txt).textContent = `${b2}/${ids.length}`;
+      document.getElementById(sec.bar).style.width = pct + '%';
+      document.getElementById(sec.msg).textContent = getMsg(pct);
+    }
+  });
+
+  if (totalDone === Object.keys(ANSWERS).length) {
+    const pct = Math.round((totalBenar / 20) * 100);
+    document.getElementById('skor-total-section').style.display = 'block';
+    document.getElementById('skor-total-txt').textContent = `${totalBenar}/20`;
+    document.getElementById('bar-total').style.width = pct + '%';
+    document.getElementById('skor-total-msg').textContent = getTotalMsg(pct);
+    document.getElementById('skor-total-sub').textContent = `${pct}% benar dari 20 soal`;
+    document.getElementById('skor-total-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function getMsg(pct) {
+  if (pct === 100) return '🏆 Sempurna! Kamu master bagian ini!';
+  if (pct >= 80) return '🎉 Bagus banget! Sedikit lagi sempurna!';
+  if (pct >= 60) return '💪 Lumayan! Ulangi yang salah ya!';
+  return '📖 Pelajari lagi rumusnya, kamu pasti bisa!';
+}
+
+function getTotalMsg(pct) {
+  if (pct >= 90) return '🏆 Luar Biasa! Siap TKA!';
+  if (pct >= 75) return '🎉 Bagus Banget! Tinggal poles!';
+  if (pct >= 55) return '💪 Lumayan! Latihan Terus!';
+  return '😊 Jangan Nyerah! Mulai dari rumus ya!';
+}
+
+function resetSemua() {
+  Object.keys(ANSWERS).forEach(k => {
+    state[k] = { chosen: null, done: false };
+    const card = document.getElementById(`card-${k}`);
+    if (card) { card.classList.remove('correct','wrong','surrendered'); }
+    const btns = document.querySelectorAll(`#opts-${k} .option-btn`);
+    btns.forEach(b => {
+      b.disabled = false;
+      b.classList.remove('selected','correct-ans','wrong-ans');
+    });
+    const pb = document.getElementById(`pb-${k}`);
+    if (pb) pb.classList.remove('show');
+    const st = document.getElementById(`st-${k}`);
+    if (st) st.textContent = '';
+    const cekBtn = document.getElementById(`cek-${k}`);
+    if (cekBtn) cekBtn.disabled = true;
+    const nyerahBtn = document.getElementById(`nyerah-${k}`);
+    if (nyerahBtn) nyerahBtn.disabled = false;
+  });
+  ['score-bilangan','score-aljabar','score-geometri','score-statistika','skor-total-section'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  ['bar-bil','bar-alj','bar-geo','bar-sta','bar-total'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.width = '0%';
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Fix G1 options (all same text was a placeholder)
+document.addEventListener('DOMContentLoaded', () => {
+  const g1opts = document.querySelectorAll('#opts-g1 .option-btn');
+  const g1labels = [
+    'A. K = 46 cm, L = 126 cm²',
+    'B. K = 40 cm, L = 120 cm²',
+    'C. K = 48 cm, L = 130 cm²',
+    'D. K = 44 cm, L = 112 cm²',
+  ];
+  g1opts.forEach((b,i) => {
+    b.textContent = g1labels[i];
+    b.setAttribute('onclick', `pilih('g1',${i})`);
+  });
+});
+</script>
+</body>
+</html>
